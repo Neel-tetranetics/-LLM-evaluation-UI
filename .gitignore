@@ -1,0 +1,26 @@
+# Secrets: HF token and sudo password. Never commit.
+.env
+
+# Python environment (8+ GB, rebuilt with `uv venv` + `uv pip install vllm pyarrow`)
+.venv/
+__pycache__/
+*.pyc
+
+# Converted datasets (85 MB, rebuilt with `prepare_datasets.py`).
+# Also: GPQA and Terminal-Bench ask that their questions are not published online in plain text.
+data/datasets/
+
+# Per-run vLLM logs and process files (large, machine-specific).
+# Run results (settings.json, results.jsonl, summary.json) ARE kept.
+data/runs/*/*.log
+data/runs/*/server.pid
+data/runs/*/*.tmp
+data/runs/*/regraded.json
+
+# Local tool folders
+.superpowers/
+.claude/
+
+# Profiler output (trace.json was 161 MB; GitHub rejects files over 100 MB)
+trace.json
+*.trace.json

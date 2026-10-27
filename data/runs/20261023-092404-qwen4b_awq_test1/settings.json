@@ -1,0 +1,32 @@
+{
+  "name": "qwen4b_awq_test1",
+  "command": "python -m vllm.entrypoints.openai.api_server --model /mnt/truenas/qwen3_5_AWQ_4bit --served-model-name judge --port 8009 --gpu-memory-utilization 0.9 --max-model-len 8192 --",
+  "model_name": "judge",
+  "model_path": "/mnt/truenas/qwen3_5_AWQ_4bit",
+  "system_prompt": "Answer the user's question. Think briefly and do not repeat yourself. As soon as you know the answer, stop thinking and give the final answer.",
+  "datasets": [
+    "arc_challenge",
+    "bfcl",
+    "custom_demo_qa",
+    "gpqa_diamond",
+    "gsm8k",
+    "hotpotqa",
+    "humaneval",
+    "ifeval",
+    "nl2bash",
+    "truthfulqa"
+  ],
+  "size": "quick",
+  "seed": 42,
+  "judge": "qwen3.5-4b(judge)",
+  "temperature": 0.6,
+  "max_tokens": 4096,
+  "created": "2026-10-23 09:24:04",
+  "status": "cancelled",
+  "progress": {
+    "done": 0,
+    "total": 902,
+    "stage": "generating"
+  },
+  "error": ""
+}

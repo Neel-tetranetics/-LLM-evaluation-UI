@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM Evaluation</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>LLM Evaluation</h1>
+    <nav>
+      <button data-page="new-run" class="active">New run</button>
+      <button data-page="runs">Runs</button>
+      <button data-page="compare">Compare</button>
+      <button data-page="datasets">Datasets</button>
+      <button data-page="settings">Settings</button>
+    </nav>
+  </header>
+
+  <div id="message" class="message hidden"></div>
+
+  <main>
+    <!-- New run -->
+    <section id="new-run" class="page">
+      <h2>New run</h2>
+      <form id="run-form">
+        <label>Run name
+          <input name="name" placeholder="qwen4b-math-prompt-v1" required>
+        </label>
+
+        <label>Test model preset
+          <select id="preset-select"><option value="">— paste your own command —</option></select>
+        </label>
+
+        <label>vLLM command for the model to test
+          <textarea name="command" rows="4" required
+            placeholder="python -m vllm.entrypoints.openai.api_server --model /mnt/truenas/... --port 8001 --gpu-memory-utilization 0.9"></textarea>
+        </label>
+        <p id="trust-warning" class="warning hidden">
+          --trust-remote-code is not allowed: it would let the model folder run Python code on this server.
+        </p>
+
+        <label>System prompt (optional)
+          <textarea name="system_prompt" rows="4" placeholder="You are a helpful assistant..."></textarea>
+        </label>
+
+        <fieldset>
+          <legend>Datasets</legend>
+          <div id="dataset-checkboxes" class="dataset-groups"></div>
+        </fieldset>
+
+        <fieldset class="inline">
+          <legend>How many questions per dataset</legend>
+          <label><input type="radio" name="size" value="quick" checked> <span>Quick (<span id="quick-size">100</span> questions)</span></label>
+          <label><input type="radio" name="size" value="full"> Full dataset</label>
+          <label><input type="radio" name="size" value="custom"> Custom
+            <input type="number" id="custom-size" min="1" value="500" class="small"></label>
+        </fieldset>
+
+        <div class="row">
+          <label>Judge
+            <select name="judge" id="judge-select"></select>
+          </label>
+          <label>Temperature
+            <input name="temperature" type="number" step="0.1" min="0" max="2" class="small">
+          </label>
+          <label>Max tokens
+            <input name="max_tokens" type="number" min="16" class="small">
+          </label>
+          <label>Top p
+            <input name="top_p" type="number" step="0.05" min="0" max="1" class="small">
+          </label>
+          <label>Top k
+            <input name="top_k" type="number" min="-1" class="small" title="-1 = off">
+          </label>
+          <label>Presence penalty
+            <input name="presence_penalty" type="number" step="0.1" min="-2" max="2" class="small">
+          </label>
+        </div>
+
+        <button type="submit" class="primary">Start run</button>
+      </form>
+    </section>
+
+    <!-- Runs -->
+    <section id="runs" class="page hidden">
+      <h2>Runs</h2>
+      <p class="hint">Tick two or more runs, then press Compare.</p>
+      <button id="compare-button">Compare selected</button>
+      <div class="table-box">
+        <table>
+          <thead><tr><th></th><th>Name</th><th>Model</th><th>Created</th><th>Status</th><th>Score</th><th></th></tr></thead>
+          <tbody id="runs-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Run detail -->
+    <section id="run-detail" class="page hidden">
+      <h2 id="detail-title">Run</h2>
+      <div id="detail-status"></div>
+      <div class="row">
+        <button id="cancel-button">Cancel run</button>
+        <button data-log="test_model">Test model log</button>
+        <button data-log="judge">Judge log</button>
+      </div>
+      <pre id="log-box" class="hidden"></pre>
+
+      <h3>Scores</h3>
+      <div class="table-box">
+        <table>
+          <thead><tr><th>Dataset</th><th>Score</th><th>Correct</th><th>Incorrect</th><th>Error</th><th>Total</th></tr></thead>
+          <tbody id="score-table"></tbody>
+        </table>
+      </div>
+
+      <h3>Settings</h3>
+      <pre id="detail-settings"></pre>
+
+      <h3>Questions</h3>
+      <label class="inline-check"><input type="checkbox" id="wrong-only"> Show only incorrect / error</label>
+      <div id="results-list"></div>
+    </section>
+
+    <!-- Compare -->
+    <section id="compare" class="page hidden">
+      <h2>Compare runs</h2>
+      <div class="table-box">
+        <table>
+          <thead id="compare-head"></thead>
+          <tbody id="compare-scores"></tbody>
+        </table>
+      </div>
+      <h3>Questions where the runs disagree (<span id="difference-count">0</span>)</h3>
+      <div class="table-box">
+        <table>
+          <thead id="difference-head"></thead>
+          <tbody id="difference-rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Datasets -->
+    <section id="datasets" class="page hidden">
+      <h2>Datasets</h2>
+      <div class="table-box">
+        <table>
+          <thead><tr><th>Name</th><th>Category</th><th>Questions</th><th>Status</th></tr></thead>
+          <tbody id="datasets-table"></tbody>
+        </table>
+      </div>
+
+      <h3>Upload a custom dataset</h3>
+      <p class="hint">
+        A .jsonl file (one JSON object per line) or a .csv file with a header row.
+        Required fields: <code>question</code>, <code>ground_truth</code>. Optional: <code>context</code>.
+        Custom datasets are graded by the judge.
+      </p>
+      <form id="upload-form">
+        <label>Dataset name <input name="name" placeholder="my_support_questions" required></label>
+        <label>File <input type="file" name="file" accept=".jsonl,.csv" required></label>
+        <button type="submit">Upload</button>
+      </form>
+    </section>
+
+    <!-- Settings -->
+    <section id="settings" class="page hidden">
+      <h2>Run settings</h2>
+      <p class="hint">Defaults for new runs (saved to config.yml). Sampling values can still be changed per run on the New run page.</p>
+      <form id="run-settings-form">
+        <label>Default judge <select name="default_judge" id="default-judge-select"></select></label>
+        <div id="run-settings-fields"></div>
+        <button type="submit" class="primary">Save run settings</button>
+      </form>
+
+      <h2>Judges</h2>
+      <div class="table-box">
+        <table>
+          <thead><tr><th>Name</th><th>Command</th><th></th></tr></thead>
+          <tbody id="judges-table"></tbody>
+        </table>
+      </div>
+      <form id="judge-form">
+        <h3>Add a judge</h3>
+        <label>Name <input name="name" required></label>
+        <label>vLLM command <textarea name="command" rows="3" required></textarea></label>
+        <p class="hint">The judge starts after the test model is stopped, so it can use most of the GPU (e.g. --gpu-memory-utilization 0.9).</p>
+        <button type="submit">Add judge</button>
+      </form>
+
+      <h2>Test model presets</h2>
+      <div class="table-box">
+        <table>
+          <thead><tr><th>Name</th><th>Command</th><th></th></tr></thead>
+          <tbody id="presets-table"></tbody>
+        </table>
+      </div>
+      <form id="preset-form">
+        <h3>Add a preset</h3>
+        <label>Name <input name="name" required></label>
+        <label>vLLM command <textarea name="command" rows="3" required></textarea></label>
+        <button type="submit">Add preset</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

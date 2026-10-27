@@ -1,0 +1,27 @@
+{
+  "name": "agent-30b-10tb-10swe-fixed",
+  "command": "python -m vllm.entrypoints.openai.api_server --model /mnt/newdisk/neel/whisper_to_fasterwhisper/model/model_qwen3_6_coding --served-model-name qwen3b --port 8008 --dtype bfloat16 --gpu-memory-utilization 0.95 --enable-auto-tool-choice --tool-call-parser qwen3_coder --kv-cache-dtype auto --max-num-seqs 1 --max-num-batched-tokens 2096 --enable-prefix-caching --tensor-parallel-size 1 --disable-log-stats --reasoning-parser qwen3 --max-model-len 131072",
+  "model_name": "qwen3b",
+  "model_path": "/mnt/newdisk/neel/whisper_to_fasterwhisper/model/model_qwen3_6_coding",
+  "system_prompt": "",
+  "datasets": [
+    "swe_bench_verified",
+    "terminal_bench_2"
+  ],
+  "size": 10,
+  "seed": 42,
+  "judge": "qwen3.5-4b(judge)",
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "presence_penalty": 1.5,
+  "max_tokens": 32384,
+  "created": "2026-10-26 13:11:44",
+  "status": "done",
+  "progress": {
+    "done": 20,
+    "total": 20,
+    "stage": "done"
+  },
+  "error": ""
+}

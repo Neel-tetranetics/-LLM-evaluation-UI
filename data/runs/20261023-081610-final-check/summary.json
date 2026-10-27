@@ -1,0 +1,51 @@
+{
+  "gsm8k": {
+    "correct": 1,
+    "incorrect": 1,
+    "error": 0,
+    "total": 2,
+    "score": 0.5
+  },
+  "overall": {
+    "correct": 8,
+    "incorrect": 4,
+    "error": 0,
+    "total": 12,
+    "score": 0.6667
+  },
+  "mmlu_pro": {
+    "correct": 1,
+    "incorrect": 1,
+    "error": 0,
+    "total": 2,
+    "score": 0.5
+  },
+  "humaneval": {
+    "correct": 2,
+    "incorrect": 0,
+    "error": 0,
+    "total": 2,
+    "score": 1.0
+  },
+  "bfcl": {
+    "correct": 1,
+    "incorrect": 1,
+    "error": 0,
+    "total": 2,
+    "score": 0.5
+  },
+  "hotpotqa": {
+    "correct": 1,
+    "incorrect": 1,
+    "error": 0,
+    "total": 2,
+    "score": 0.5
+  },
+  "custom_demo_qa": {
+    "correct": 2,
+    "incorrect": 0,
+    "error": 0,
+    "total": 2,
+    "score": 1.0
+  }
+}

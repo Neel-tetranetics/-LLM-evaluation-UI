@@ -1,0 +1,37 @@
+{
+  "gsm8k": {
+    "correct": 0,
+    "incorrect": 2,
+    "error": 0,
+    "total": 2,
+    "score": 0.0
+  },
+  "overall": {
+    "correct": 2,
+    "incorrect": 6,
+    "error": 0,
+    "total": 8,
+    "score": 0.25
+  },
+  "truthfulqa": {
+    "correct": 0,
+    "incorrect": 2,
+    "error": 0,
+    "total": 2,
+    "score": 0.0
+  },
+  "hotpotqa": {
+    "correct": 2,
+    "incorrect": 0,
+    "error": 0,
+    "total": 2,
+    "score": 1.0
+  },
+  "nl2bash": {
+    "correct": 0,
+    "incorrect": 2,
+    "error": 0,
+    "total": 2,
+    "score": 0.0
+  }
+}

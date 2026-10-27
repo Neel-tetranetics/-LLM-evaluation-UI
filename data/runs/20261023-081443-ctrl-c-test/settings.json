@@ -1,0 +1,23 @@
+{
+  "name": "ctrl-c-test",
+  "command": "python -m vllm.entrypoints.openai.api_server --model /mnt/truenas/qwen3-5_4b --served-model-name test --port 8001 --gpu-memory-utilization 0.9 --max-model-len 16384 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3",
+  "model_name": "test",
+  "model_path": "/mnt/truenas/qwen3-5_4b",
+  "system_prompt": "",
+  "datasets": [
+    "gsm8k"
+  ],
+  "size": 1,
+  "seed": 42,
+  "judge": "qwen3.5-4b-awq (fast)",
+  "temperature": 0.6,
+  "max_tokens": 4096,
+  "created": "2026-10-23 08:14:43",
+  "status": "interrupted",
+  "progress": {
+    "done": 0,
+    "total": 0,
+    "stage": "starting_model"
+  },
+  "error": "app restarted during the run"
+}

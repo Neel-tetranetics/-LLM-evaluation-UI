@@ -1,0 +1,100 @@
+{
+  "gsm8k": {
+    "correct": 9,
+    "incorrect": 1,
+    "error": 0,
+    "total": 10,
+    "score": 0.9
+  },
+  "overall": {
+    "correct": 92,
+    "incorrect": 38,
+    "error": 0,
+    "total": 130,
+    "score": 0.7077
+  },
+  "math500": {
+    "correct": 8,
+    "incorrect": 2,
+    "error": 0,
+    "total": 10,
+    "score": 0.8
+  },
+  "mmlu_pro": {
+    "correct": 6,
+    "incorrect": 4,
+    "error": 0,
+    "total": 10,
+    "score": 0.6
+  },
+  "gpqa_diamond": {
+    "correct": 9,
+    "incorrect": 1,
+    "error": 0,
+    "total": 10,
+    "score": 0.9
+  },
+  "arc_challenge": {
+    "correct": 9,
+    "incorrect": 1,
+    "error": 0,
+    "total": 10,
+    "score": 0.9
+  },
+  "humaneval": {
+    "correct": 10,
+    "incorrect": 0,
+    "error": 0,
+    "total": 10,
+    "score": 1.0
+  },
+  "mbpp": {
+    "correct": 9,
+    "incorrect": 1,
+    "error": 0,
+    "total": 10,
+    "score": 0.9
+  },
+  "bfcl": {
+    "correct": 10,
+    "incorrect": 0,
+    "error": 0,
+    "total": 10,
+    "score": 1.0
+  },
+  "hotpotqa": {
+    "correct": 7,
+    "incorrect": 3,
+    "error": 0,
+    "total": 10,
+    "score": 0.7
+  },
+  "squad_v2": {
+    "correct": 6,
+    "incorrect": 4,
+    "error": 0,
+    "total": 10,
+    "score": 0.6
+  },
+  "ifeval": {
+    "correct": 4,
+    "incorrect": 6,
+    "error": 0,
+    "total": 10,
+    "score": 0.4
+  },
+  "truthfulqa": {
+    "correct": 3,
+    "incorrect": 7,
+    "error": 0,
+    "total": 10,
+    "score": 0.3
+  },
+  "nl2bash": {
+    "correct": 2,
+    "incorrect": 8,
+    "error": 0,
+    "total": 10,
+    "score": 0.2
+  }
+}

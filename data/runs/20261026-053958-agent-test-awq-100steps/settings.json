@@ -1,0 +1,27 @@
+{
+  "name": "agent-test-awq-100steps",
+  "command": "python -m vllm.entrypoints.openai.api_server --model /mnt/truenas/qwen3_5_AWQ_4bit --served-model-name test --port 8001 --gpu-memory-utilization 0.45 --max-model-len 40960 --max-num-seqs 16 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3",
+  "model_name": "test",
+  "model_path": "/mnt/truenas/qwen3_5_AWQ_4bit",
+  "system_prompt": "",
+  "datasets": [
+    "swe_bench_verified",
+    "terminal_bench_2"
+  ],
+  "size": 2,
+  "seed": 42,
+  "judge": "qwen3.5-4b(judge)",
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "presence_penalty": 1.5,
+  "max_tokens": 32384,
+  "created": "2026-10-26 05:39:58",
+  "status": "done",
+  "progress": {
+    "done": 4,
+    "total": 4,
+    "stage": "done"
+  },
+  "error": ""
+}

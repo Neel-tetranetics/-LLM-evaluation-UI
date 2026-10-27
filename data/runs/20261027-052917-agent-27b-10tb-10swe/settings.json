@@ -1,0 +1,27 @@
+{
+  "name": "agent-27b-10tb-10swe",
+  "command": "vllm serve /mnt/nas/neel/qwen3-8_27 --host 0.0.0.0 --port 8008 --served-model-name qwen3 --dtype auto --gpu-memory-utilization 0.95 --kv-cache-dtype fp8 --tensor-parallel-size 1 --max-num-seqs 1 --max-num-batched-tokens 4096 --async-scheduling --speculative-config '{\"method\":\"mtp\",\"num_speculative_tokens\":3}' --enable-prefix-caching --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --disable-log-stats --max-model-len 131072",
+  "model_name": "qwen3",
+  "model_path": "qwen3",
+  "system_prompt": "",
+  "datasets": [
+    "swe_bench_verified",
+    "terminal_bench_2"
+  ],
+  "size": 10,
+  "seed": 42,
+  "judge": "qwen3.5-4b(judge)",
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "presence_penalty": 1.5,
+  "max_tokens": 32384,
+  "created": "2026-10-27 05:29:17",
+  "status": "failed",
+  "progress": {
+    "done": 0,
+    "total": 0,
+    "stage": "starting_model"
+  },
+  "error": "vLLM exited with code 1. Last log lines:\n             ^^^^^^\n  File \"/mnt/newdisk/neel/LLM_EVALUATION/.venv/lib/python3.12/site-packages/vllm/entrypoints/cli/main.py\", line 120, in main\n    args.dispatch_function(args)\n  File \"/mnt/newdisk/neel/LLM_EVALUATION/.venv/lib/python3.12/site-packages/vllm/entrypoints/cli/serve.py\", line 156, in cmd\n    uvloop.run(run_server(args))\n  File \"/mnt/newdisk/neel/LLM_EVALUATION/.venv/lib/python3.12/site-packages/uvloop/__init__.py\", line 96, in run\n    return __asyncio.run(\n           ^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/asyncio/runners.py\", line 194, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"uvloop/loop.pyx\", line 1515, in uvloop.loop.Loop.run_until_complete\n  File \"/mnt/newdisk/neel/LLM_EVALUATION/.venv/lib/python3.12/site-packages/uvloop/__init__.py\", line 48, in wrapper\n    return await main\n           ^^^^^^^^^^\n  File \"/mnt/newdisk/neel/LLM_EVALUATION/.venv/lib/python3.12/site-packages/vllm/entrypoints/launchers/api_server/entry.py\", line 177, in run_server\n    await run_server_worker(listen_address, sock, args, **uvicorn_kwargs)\n  File \"/mnt/newdisk/neel/LLM_EVALUATION/.venv/lib/python3.12/site-packages/vllm/entrypoints/launchers/api_server/entry.py\", line 195, in run_server_worker\n    async with build_async_engine_client(\n  File \"/usr/lib/python3.12/contextlib.py\", line 210, in __aenter__\n    return await anext(self.gen)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/newdisk/neel/LLM_EVALUATION/.venv/lib/python3.12/site-packages/vllm/entrypoints/launchers/api_server/entry.py\", line 61, in build_async_engine_client\n    async with build_async_engine_client_from_engine_args(\n  File \"/usr/lib/python3.12/contextlib.py\", line 210, in __aenter__\n    return await anext(self.gen)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/newdisk/neel/LLM_EVALUATION/.venv/lib/python3.12/site-packages/vllm/entrypoints/launchers/api_server/entry.py\", line 83, in build_async_engine_client_from_engine_args\n    vllm_config = engine_args.create_engine_config(usage_context=usage_context)\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/newdisk/neel/LLM_EVALUATION/.venv/lib/python3.12/site-packages/vllm/engine/arg_utils.py\", line 2230, in create_engine_config\n    maybe_override_with_speculators(\n  File \"/mnt/newdisk/neel/LLM_EVALUATION/.venv/lib/python3.12/site-packages/vllm/transformers_utils/config.py\", line 781, in maybe_override_with_speculators\n    config_dict, _ = PreTrainedConfig.get_config_dict(\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/newdisk/neel/LLM_EVALUATION/.venv/lib/python3.12/site-packages/transformers/configuration_utils.py\", line 792, in get_config_dict\n    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/newdisk/neel/LLM_EVALUATION/.venv/lib/python3.12/site-packages/transformers/configuration_utils.py\", line 844, in _get_config_dict\n    resolved_config_file = cached_file(\n                           ^^^^^^^^^^^^\n  File \"/mnt/newdisk/neel/LLM_EVALUATION/.venv/lib/python3.12/site-packages/transformers/utils/hub.py\", line 370, in cached_file\n    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/newdisk/neel/LLM_EVALUATION/.venv/lib/python3.12/site-packages/transformers/utils/hub.py\", line 595, in cached_files\n    raise OSError(f\"{e}\") from e\nOSError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/mnt/nas/neel/qwen3-8_27'. Use `repo_type` argument if needed."
+}

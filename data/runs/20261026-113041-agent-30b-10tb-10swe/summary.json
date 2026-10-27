@@ -1,0 +1,23 @@
+{
+  "swe_bench_verified": {
+    "correct": 7,
+    "incorrect": 3,
+    "error": 0,
+    "total": 10,
+    "score": 0.7
+  },
+  "overall": {
+    "correct": 12,
+    "incorrect": 5,
+    "error": 0,
+    "total": 17,
+    "score": 0.7059
+  },
+  "terminal_bench_2": {
+    "correct": 5,
+    "incorrect": 2,
+    "error": 0,
+    "total": 7,
+    "score": 0.7143
+  }
+}

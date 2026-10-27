@@ -1,0 +1,26 @@
+{
+  "name": "smoke-judge",
+  "command": "python -m vllm.entrypoints.openai.api_server --model /mnt/truenas/qwen3-5_4b --served-model-name test --port 8001 --gpu-memory-utilization 0.9 --max-model-len 16384 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3",
+  "model_name": "test",
+  "model_path": "/mnt/truenas/qwen3-5_4b",
+  "system_prompt": "",
+  "datasets": [
+    "gsm8k",
+    "truthfulqa",
+    "hotpotqa",
+    "nl2bash"
+  ],
+  "size": 2,
+  "seed": 42,
+  "judge": "qwen3.5-4b-awq (fast)",
+  "temperature": 0.6,
+  "max_tokens": 8192,
+  "created": "2026-10-23 07:52:48",
+  "status": "done",
+  "progress": {
+    "done": 8,
+    "total": 8,
+    "stage": "done"
+  },
+  "error": ""
+}

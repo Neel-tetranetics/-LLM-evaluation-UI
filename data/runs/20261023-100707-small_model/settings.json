@@ -1,0 +1,38 @@
+{
+  "name": "small_model",
+  "command": "python -m vllm.entrypoints.openai.api_server --model /mnt/truenas/qwen3_5_AWQ_4bit --served-model-name test --host 0.0.0.0 --port 8001 --gpu-memory-utilization 0.90 --max-model-len 40960 --max-num-seqs 16 --max-num-batched-tokens 8192 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3",
+  "model_name": "test",
+  "model_path": "/mnt/truenas/qwen3_5_AWQ_4bit",
+  "system_prompt": "Answer the user's question. Think briefly and do not repeat yourself. As soon as you know the answer, stop thinking and give the final answer.",
+  "datasets": [
+    "arc_challenge",
+    "bfcl",
+    "custom_demo_qa",
+    "gpqa_diamond",
+    "mmlu_pro",
+    "gsm8k",
+    "math500",
+    "hotpotqa",
+    "squad_v2",
+    "humaneval",
+    "mbpp",
+    "ifeval",
+    "truthfulqa"
+  ],
+  "size": "full",
+  "seed": 42,
+  "judge": "qwen3.5-4b-awq (fast)",
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "presence_penalty": 1.5,
+  "max_tokens": 32384,
+  "created": "2026-10-23 10:07:07",
+  "status": "cancelled",
+  "progress": {
+    "done": 0,
+    "total": 37280,
+    "stage": "generating"
+  },
+  "error": ""
+}
